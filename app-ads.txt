@@ -1,0 +1,9 @@
+# Authorized digital sellers for apps — https://iabtechlab.com/app-ads-txt/
+#
+# Must stay at the ROOT of this domain. Crawlers derive the root domain via
+# the Public Suffix List, on which github.io is a private suffix, so this
+# file is only ever fetched from https://jonathanivorhill.github.io/app-ads.txt
+# — never from a project-page subdirectory.
+#
+# Slingstar publisher ID, from the AdMob console: pub-5374765650645754
+google.com, pub-5374765650645754, DIRECT, f08c47fec0942fa0

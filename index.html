@@ -4,30 +4,101 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slingstar</title>
+<meta name="description" content="Slingstar — a one-tap arcade game among real planets. Sling between orbits, don't miss. Free on Google Play.">
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-    background: radial-gradient(circle at 50% 30%, #16204a 0%, #080c20 60%);
+    background: radial-gradient(circle at 50% 20%, #16204a 0%, #080c20 55%) fixed;
     color: #fff;
     font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     text-align: center;
   }
+  main { padding: 3.5rem 1.25rem 2rem; max-width: 960px; margin: 0 auto; }
   h1 {
     margin: 0 0 .6rem;
-    font-size: clamp(2rem, 9vw, 2.8rem);
+    font-size: clamp(2rem, 9vw, 3rem);
     font-weight: 900;
     letter-spacing: .5rem;
     text-indent: .5rem;
   }
-  p.tag { margin: 0 0 2.4rem; color: rgba(255,255,255,.45); letter-spacing: .08rem; }
+  p.tag { margin: 0 0 2.2rem; color: rgba(255,255,255,.45); letter-spacing: .08rem; }
+  a.play {
+    display: inline-block;
+    margin: 0 0 .9rem;
+    padding: 1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .14rem;
+    white-space: nowrap;
+    text-decoration: none;
+    border-radius: 999px;
+    background: #ffd75e;
+    border: 1px solid #ffd75e;
+    color: #080c20;
+    box-shadow: 0 0 32px rgba(255, 215, 94, .35);
+  }
+  a.play:hover, a.play:focus-visible { background: #ffe285; border-color: #ffe285; }
+  p.soon { margin: 0 0 2.6rem; font-size: .75rem; color: rgba(255,255,255,.35); letter-spacing: .1rem; }
+
+  /* Screenshots: one scrollable strip, phones floating in space. */
+  .shots {
+    display: flex;
+    gap: .9rem;
+    overflow-x: auto;
+    padding: .5rem .25rem 1.1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .shots::after { content: ""; flex: 0 0 .1rem; } /* breathing room at the end */
+  .shots img {
+    flex: 0 0 auto;
+    width: clamp(150px, 38vw, 200px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 12px 34px rgba(0,0,0,.5);
+    scroll-snap-align: center;
+  }
+  .hint { margin: 0 0 3rem; font-size: .7rem; color: rgba(255,255,255,.25); letter-spacing: .12rem; }
+
+  section.worlds { margin: 0 auto 3rem; max-width: 34rem; }
+  h2 {
+    margin: 0 0 .8rem;
+    font-size: .95rem;
+    font-weight: 900;
+    letter-spacing: .3rem;
+    color: #ffd75e;
+  }
+  section.worlds p { margin: 0; color: rgba(255,255,255,.6); font-size: .95rem; }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0 0 3rem;
+  }
+  .features div {
+    flex: 1 1 220px;
+    max-width: 280px;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,.03);
+  }
+  .features strong {
+    display: block;
+    margin-bottom: .35rem;
+    font-size: .8rem;
+    letter-spacing: .14rem;
+  }
+  .features span { font-size: .85rem; color: rgba(255,255,255,.55); }
+
+  p.credits { margin: 0 auto 2.6rem; max-width: 36rem; font-size: .7rem; color: rgba(255,255,255,.3); letter-spacing: .04rem; }
+
   nav { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
-  a {
+  nav a {
     color: #fff;
     text-decoration: none;
     padding: .55rem 1.3rem;
@@ -37,22 +108,8 @@
     font-weight: 700;
     letter-spacing: .12rem;
   }
-  a:hover, a:focus-visible { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.55); }
-  a.play {
-    display: inline-block;
-    margin: 0 0 1rem;
-    padding: 1rem 2.2rem;
-    font-size: 1rem;
-    letter-spacing: .14rem;
-    white-space: nowrap;
-    background: #ffd75e;
-    border-color: #ffd75e;
-    color: #080c20;
-    box-shadow: 0 0 32px rgba(255, 215, 94, .35);
-  }
-  a.play:hover, a.play:focus-visible { background: #ffe285; border-color: #ffe285; }
-  p.soon { margin: 0 0 2.4rem; font-size: .75rem; color: rgba(255,255,255,.35); letter-spacing: .1rem; }
-  footer { margin-top: 3rem; font-size: .75rem; color: rgba(255,255,255,.3); }
+  nav a:hover, nav a:focus-visible { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.55); }
+  footer { margin-top: 2.6rem; font-size: .75rem; color: rgba(255,255,255,.3); }
 </style>
 </head>
 <body>
@@ -63,11 +120,49 @@
        href="https://play.google.com/store/apps/details?id=com.jonathanivorhill.slingstar">
       GET IT ON GOOGLE PLAY</a>
     <p class="soon">free · iPhone version coming soon</p>
+
+    <div class="shots">
+      <img src="img/shot-jupiter.jpg" alt="An enormous Jupiter beside the orbit rings" width="420" height="910">
+      <img src="img/shot-sanctuary.jpg" alt="A sanctuary Earth glowing green" width="420" height="910" loading="lazy">
+      <img src="img/shot-launch.jpg" alt="A slingshot launch away from Earth" width="420" height="910" loading="lazy">
+      <img src="img/shot-cosmic.jpg" alt="A cosmic chain with the ring on fire" width="420" height="910" loading="lazy">
+      <img src="img/shot-io.jpg" alt="Two volcanic Io worlds in a red zone" width="420" height="910" loading="lazy">
+      <img src="img/shot-ranks.jpg" alt="The world leaderboard" width="420" height="910" loading="lazy">
+    </div>
+    <p class="hint">swipe for more</p>
+
+    <section class="worlds">
+      <h2>THE WORLDS ARE REAL</h2>
+      <p>Every ring holds a planet at its heart — and they're the real ones.
+      Earth is NASA's Blue Marble. Jupiter turns up once per run, enormous,
+      with the Great Red Spot parading past. Mars, the Moon, Europa, Io and
+      more fly with their true faces, built from NASA imagery and the maps
+      scientists actually use.</p>
+    </section>
+
+    <div class="features">
+      <div>
+        <strong>ONE TAP</strong>
+        <span>Your star orbits a ring. Tap to sling it across the void and catch the next one. Easy to learn, brutal to master.</span>
+      </div>
+      <div>
+        <strong>CATCH FIRE</strong>
+        <span>Reverse your orbit ring after ring to build a slingshot weave and set the sky burning.</span>
+      </div>
+      <div>
+        <strong>CLIMB THE WORLD</strong>
+        <span>A world leaderboard that celebrates you — rank climbs, podium ceremonies, medals you keep while you hold them.</span>
+      </div>
+    </div>
+
+    <p class="credits">Planet imagery: NASA. Planet texture maps by Solar System
+    Scope (CC BY 4.0). Europa &amp; Io mosaics: NASA/JPL/USGS Astrogeology.</p>
+
     <nav>
       <a href="https://jonathanivorhill.github.io/slingstar-privacy/">PRIVACY POLICY</a>
       <a href="mailto:slingstar.app@gmail.com">CONTACT</a>
     </nav>
-    <footer>An arcade game by Jonathan Hill.</footer>
+    <footer>Made in Vancouver by a dad and his daughter.</footer>
   </main>
 </body>
 </html>

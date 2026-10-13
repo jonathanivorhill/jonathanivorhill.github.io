@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Slingstar</title>
+<meta name="description" content="Slingstar — a one-tap arcade game among real planets. Free on the App Store and Google Play.">
+<script>
+  // One link for every bio and sticker: send each phone straight to its own
+  // store. Runs before anything paints so a phone never sees this page.
+  // iPadOS reports itself as a Mac, so a Mac with a touchscreen is an iPad.
+  (function () {
+    var ua = navigator.userAgent || '';
+    var ios = /iPhone|iPad|iPod/.test(ua) ||
+      (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var android = /Android/.test(ua);
+    if (ios) location.replace('https://apps.apple.com/app/id6795752567');
+    else if (android) location.replace('https://play.google.com/store/apps/details?id=com.jonathanivorhill.slingstar');
+  })();
+</script>
+<style>
+  html, body { margin: 0; min-height: 100%; background: #080c20; color: #fff; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 2rem 1rem; box-sizing: border-box; text-align: center;
+  }
+  h1 { margin: 0 0 .6rem; font-size: 2.4rem; letter-spacing: .5rem; margin-right: -.5rem; }
+  p { margin: 0 0 2rem; color: rgba(255,255,255,.5); letter-spacing: .08rem; }
+  .stores { display: flex; flex-wrap: wrap; justify-content: center; gap: .9rem; }
+  a.play {
+    display: inline-block; padding: 1rem 2.2rem; font-weight: 700; letter-spacing: .14rem;
+    white-space: nowrap; text-decoration: none; border-radius: 999px;
+    background: #ffd75e; color: #080c20; box-shadow: 0 0 32px rgba(255, 215, 94, .35);
+  }
+  a.play:hover, a.play:focus-visible { background: #ffe285; }
+</style>
+</head>
+<body>
+  <h1>SLINGSTAR</h1>
+  <p>free · no ads</p>
+  <div class="stores">
+    <a class="play" href="https://apps.apple.com/app/id6795752567">GET IT ON THE APP STORE</a>
+    <a class="play" href="https://play.google.com/store/apps/details?id=com.jonathanivorhill.slingstar">GET IT ON GOOGLE PLAY</a>
+  </div>
+</body>
+</html>

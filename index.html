@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slingstar</title>
-<meta name="description" content="Slingstar — a one-tap arcade game among real planets. Sling between orbits, don't miss. Free on Google Play.">
+<meta name="description" content="Slingstar — a one-tap arcade game among real planets. Sling between orbits, don't miss. Free on the App Store and Google Play.">
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -24,9 +24,16 @@
     text-indent: .5rem;
   }
   p.tag { margin: 0 0 2.2rem; color: rgba(255,255,255,.45); letter-spacing: .08rem; }
+  /* Two stores side by side; on a narrow phone they stack instead. */
+  .stores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .9rem;
+    margin: 0 0 .9rem;
+  }
   a.play {
     display: inline-block;
-    margin: 0 0 .9rem;
     padding: 1rem 2.2rem;
     font-size: 1rem;
     font-weight: 700;
@@ -117,10 +124,14 @@
   <main>
     <h1>SLINGSTAR</h1>
     <p class="tag">sling between real planets — don't miss</p>
-    <a class="play"
-       href="https://play.google.com/store/apps/details?id=com.jonathanivorhill.slingstar">
-      GET IT ON GOOGLE PLAY</a>
-    <p class="soon">free · iPhone version coming soon</p>
+    <div class="stores">
+      <a class="play" href="https://apps.apple.com/app/id6795752567">
+        GET IT ON THE APP STORE</a>
+      <a class="play"
+         href="https://play.google.com/store/apps/details?id=com.jonathanivorhill.slingstar">
+        GET IT ON GOOGLE PLAY</a>
+    </div>
+    <p class="soon">free · iPhone, iPad and Android · no ads</p>
 
     <div class="shots">
       <img src="img/shot-jupiter.jpg" alt="An enormous Jupiter beside the orbit rings" width="420" height="910">
